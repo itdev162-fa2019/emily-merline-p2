@@ -8,7 +8,8 @@ import CreateProject from './components/Project/CreateProject'
 import ProjectList from './components/Project/ProjectList'
 import Project from './components/Project/Project'
 import EditProject from './components/Project/EditProject'
-//import EditList from './components/List/EditList'
+import EditList from './components//Project/List/EditList'
+import EditNote from './components//Project/List/EditNote'
 import CreateList from './components/Project/List/CreateList'
 import CreateNote from './components/Project/List/CreateNote'
 
@@ -102,6 +103,23 @@ class App extends React.Component {
     })
   }
 
+  onNoteUpdated = note => {
+    console.log('updated list: ', note)
+    const newNotes = [...this.state.notes]
+    const index = newNotes.findIndex(n => n.id === note.id)
+
+    newNotes[index] = note
+
+    const projName = note.projectName
+    
+    const projectNotes = newNotes.filter(note => note.projectName === projName)
+
+    this.setState({
+      ntoes: newNotes,
+      projectNotes: projectNotes
+    })
+  }
+
 
   onProjectUpdated = project => {
     console.log('updated project: ', project)
@@ -137,7 +155,7 @@ class App extends React.Component {
       .then(response => {
         const newProjects = this.state.projects.filter(p => p.id !== project.id)
         this.setState({
-          posts: [...newProjects]
+          projects: [...newProjects]
         })
       })
 
@@ -146,9 +164,80 @@ class App extends React.Component {
       })
   }
 
+  deleteList = list => {
+    axios
+      .delete(`http://localhost:5000/api/lists/${list.id}`)
+      .then(response => {
+        const newLists = this.state.lists.filter(l => l.id !== list.id)
+        const projectLists = newLists.filter(list => list.projectName === this.state.project.name)
+
+        //also have to remove list from project lists
+        const currentProjLists = this.state.project.lists.split(',')
+        let newStringLists
+        if(currentProjLists.length === 1){
+          newStringLists = ""
+        } else {
+          const newProjLists = currentProjLists.filter(listId => listId !== list.id)
+          newStringLists = newProjLists.toString()
+
+        }
+        this.updateListOrder(this.state.project, newStringLists)
+
+        this.setState({
+          lists: [...newLists],
+          projectLists: projectLists
+        })
+      })
+
+      .catch(error => {
+        console.error(`Error deleting list: ${error}`)
+      })
+  }
+
+  deleteNote = (note, list) => {
+    axios
+      .delete(`http://localhost:5000/api/notes/${note.id}`)
+      .then(response => {
+        const newNotes = this.state.notes.filter(n => n.id !== note.id)
+        const projectNotes = newNotes.filter(note => note.projectName === this.state.project.name)
+        //also have to remove note from list notes
+        const currentListNotes = list.notes.split(',')
+        let newStringNotes
+        if(currentListNotes.length === 1){
+          newStringNotes = ""
+        } else {
+          const newListNotes = currentListNotes.filter(noteId => noteId !== note.id)
+          newStringNotes = newListNotes.toString()
+
+        }
+        this.updateNoteOrder(list, newStringNotes)
+
+        this.setState({
+          notes: [...newNotes],
+          projectNotes: projectNotes
+        })
+      })
+
+      .catch(error => {
+        console.error(`Error deleting note: ${error}`)
+      })
+  }
+
   editProject = project => {
     this.setState({
       project: project
+    })
+  }
+
+  editList= list => {
+    this.setState({
+      list: list
+    })
+  }
+
+  editNote = note => {
+    this.setState({
+      note: note
     })
   }
 
@@ -302,7 +391,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { projects, project, projectLists, list, projectNotes } = this.state
+    const { projects, project, projectLists, list, note, projectNotes } = this.state
 
     return (
       <Router>
@@ -332,7 +421,10 @@ class App extends React.Component {
                 project={project}
                 projectLists={projectLists}
                 projectNotes={projectNotes}
-                editList={this.onListUpdated}
+                editList={this.editList}
+                editNote={this.editNote}
+                deleteList={this.deleteList}
+                deleteNote={this.deleteNote}
                 createNewNote={this.createNewNote}
                 updateListOrder={this.updateListOrder}
                 updateNoteOrder={this.updateNoteOrder}
@@ -351,6 +443,12 @@ class App extends React.Component {
               </Route>
               <Route path="/new-note">
                 <CreateNote project={project} list={list} onNoteCreated={this.onNoteCreated} onListUpdated={this.onListUpdated}></CreateNote>
+              </Route>
+              <Route path="/edit-list">
+              <EditList list={list} onListUpdated={this.onListUpdated} project={project}></EditList>
+              </Route>
+              <Route path="/edit-note">
+              <EditNote note={note} onNoteUpdated={this.onNoteUpdated} project={project}></EditNote>
               </Route>
             </Switch>
           </main>

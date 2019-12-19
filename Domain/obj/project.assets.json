@@ -185,11 +185,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Emily\\final-client-v1\\emily-merline-p2\\Domain\\Domain.csproj",
+      "projectUniqueName": "C:\\Users\\Emily\\initial-projects2\\initial-client\\emily-merline-p2\\Domain\\Domain.csproj",
       "projectName": "Domain",
-      "projectPath": "C:\\Users\\Emily\\final-client-v1\\emily-merline-p2\\Domain\\Domain.csproj",
+      "projectPath": "C:\\Users\\Emily\\initial-projects2\\initial-client\\emily-merline-p2\\Domain\\Domain.csproj",
       "packagesPath": "C:\\Users\\Emily\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Emily\\final-client-v1\\emily-merline-p2\\Domain\\obj\\",
+      "outputPath": "C:\\Users\\Emily\\initial-projects2\\initial-client\\emily-merline-p2\\Domain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

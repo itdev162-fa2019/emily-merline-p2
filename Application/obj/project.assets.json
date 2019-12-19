@@ -4073,11 +4073,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Emily\\final-client-v1\\emily-merline-p2\\Application\\Application.csproj",
+      "projectUniqueName": "C:\\Users\\Emily\\initial-projects2\\initial-client\\emily-merline-p2\\Application\\Application.csproj",
       "projectName": "Application",
-      "projectPath": "C:\\Users\\Emily\\final-client-v1\\emily-merline-p2\\Application\\Application.csproj",
+      "projectPath": "C:\\Users\\Emily\\initial-projects2\\initial-client\\emily-merline-p2\\Application\\Application.csproj",
       "packagesPath": "C:\\Users\\Emily\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Emily\\final-client-v1\\emily-merline-p2\\Application\\obj\\",
+      "outputPath": "C:\\Users\\Emily\\initial-projects2\\initial-client\\emily-merline-p2\\Application\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -4096,11 +4096,11 @@
       "frameworks": {
         "netstandard2.0": {
           "projectReferences": {
-            "C:\\Users\\Emily\\final-client-v1\\emily-merline-p2\\Domain\\Domain.csproj": {
-              "projectPath": "C:\\Users\\Emily\\final-client-v1\\emily-merline-p2\\Domain\\Domain.csproj"
+            "C:\\Users\\Emily\\initial-projects2\\initial-client\\emily-merline-p2\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\Users\\Emily\\initial-projects2\\initial-client\\emily-merline-p2\\Domain\\Domain.csproj"
             },
-            "C:\\Users\\Emily\\final-client-v1\\emily-merline-p2\\Persistence\\Persistence.csproj": {
-              "projectPath": "C:\\Users\\Emily\\final-client-v1\\emily-merline-p2\\Persistence\\Persistence.csproj"
+            "C:\\Users\\Emily\\initial-projects2\\initial-client\\emily-merline-p2\\Persistence\\Persistence.csproj": {
+              "projectPath": "C:\\Users\\Emily\\initial-projects2\\initial-client\\emily-merline-p2\\Persistence\\Persistence.csproj"
             }
           }
         }

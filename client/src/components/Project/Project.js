@@ -8,7 +8,7 @@ const Container = styled.div`
 `
 
 const Project = props => {
-    const { project, projectLists, projectNotes, editList, createNewNote, updateListOrder, updateNoteOrder, updateNoteOrderTwo } = props
+    const { project, projectLists, projectNotes, editList, editNote, deleteList, deleteNote, createNewNote, updateListOrder, updateNoteOrder, updateNoteOrderTwo } = props
 
    const onDragEnd = result => {
         const { destination, source, draggableId, type } = result
@@ -62,9 +62,14 @@ const Project = props => {
         homeNotesOrder.splice(source.index, 1)
         const homeNotesString = homeNotesOrder.toString()
 
-        const foreignNotesOrder = foreignList.notes.split(',')
-        foreignNotesOrder.splice(destination.index, 0, draggableId)
-        const foreignNotesString = foreignNotesOrder.toString()
+        let foreignNotesString
+        if(foreignList.notes.length > 1){
+            const foreignNotesOrder = foreignList.notes.split(',')
+            foreignNotesOrder.splice(destination.index, 0, draggableId)
+            foreignNotesString = foreignNotesOrder.toString()
+        } else {
+            foreignNotesString = draggableId
+        }
 
         updateNoteOrderTwo(homeList, foreignList, homeNotesString,foreignNotesString)
     }
@@ -94,6 +99,9 @@ const Project = props => {
                 projectNotes={projectNotes}
                 index={index}
                 editList={editList}
+                editNote={editNote}
+                deleteList={deleteList}
+                deleteNote={deleteNote}
                 createNewNote={createNewNote}
                 />
             })}  

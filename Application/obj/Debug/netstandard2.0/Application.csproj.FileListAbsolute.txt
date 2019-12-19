@@ -37,3 +37,16 @@ C:\Users\Emily\final-client-v1\emily-merline-p2\Application\obj\Debug\netstandar
 C:\Users\Emily\final-client-v1\emily-merline-p2\Application\obj\Debug\netstandard2.0\Application.csproj.CopyComplete
 C:\Users\Emily\final-client-v1\emily-merline-p2\Application\obj\Debug\netstandard2.0\Application.dll
 C:\Users\Emily\final-client-v1\emily-merline-p2\Application\obj\Debug\netstandard2.0\Application.pdb
+C:\Users\Emily\initial-projects2\initial-client\emily-merline-p2\Application\bin\Debug\netstandard2.0\Application.deps.json
+C:\Users\Emily\initial-projects2\initial-client\emily-merline-p2\Application\bin\Debug\netstandard2.0\Application.dll
+C:\Users\Emily\initial-projects2\initial-client\emily-merline-p2\Application\bin\Debug\netstandard2.0\Application.pdb
+C:\Users\Emily\initial-projects2\initial-client\emily-merline-p2\Application\bin\Debug\netstandard2.0\Domain.dll
+C:\Users\Emily\initial-projects2\initial-client\emily-merline-p2\Application\bin\Debug\netstandard2.0\Persistence.dll
+C:\Users\Emily\initial-projects2\initial-client\emily-merline-p2\Application\bin\Debug\netstandard2.0\Domain.pdb
+C:\Users\Emily\initial-projects2\initial-client\emily-merline-p2\Application\bin\Debug\netstandard2.0\Persistence.pdb
+C:\Users\Emily\initial-projects2\initial-client\emily-merline-p2\Application\obj\Debug\netstandard2.0\Application.csprojAssemblyReference.cache
+C:\Users\Emily\initial-projects2\initial-client\emily-merline-p2\Application\obj\Debug\netstandard2.0\Application.AssemblyInfoInputs.cache
+C:\Users\Emily\initial-projects2\initial-client\emily-merline-p2\Application\obj\Debug\netstandard2.0\Application.AssemblyInfo.cs
+C:\Users\Emily\initial-projects2\initial-client\emily-merline-p2\Application\obj\Debug\netstandard2.0\Application.csproj.CopyComplete
+C:\Users\Emily\initial-projects2\initial-client\emily-merline-p2\Application\obj\Debug\netstandard2.0\Application.dll
+C:\Users\Emily\initial-projects2\initial-client\emily-merline-p2\Application\obj\Debug\netstandard2.0\Application.pdb

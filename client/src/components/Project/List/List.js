@@ -30,13 +30,19 @@ const NoteList = styled.div`
 
 const List = props => {
     
-    const { list, projectNotes, index, editList, createNewNote } = props
+    const { list, projectNotes, index, editList, editNote, deleteList, deleteNote, createNewNote } = props
     let history = useHistory()
 
     const handleCreateNote = list => {
         createNewNote(list)
         history.push(`/new-note`)
     }
+
+    const handleEditList = list => {
+        editList(list)
+        history.push(`/edit-list`)
+    }
+
 
     let notes;
 
@@ -45,7 +51,8 @@ const List = props => {
     }else {
         notes = list.notes.split(',')
     }
-
+    console.log(`Notes array: ${notes}`)
+    console.log(`Notes array length: ${notes.length}`)
         return (
             <Draggable draggableId={list.id} index={index}>
                 {(provided)=> (
@@ -56,6 +63,8 @@ const List = props => {
                     <Title {...provided.dragHandleProps}>
                         {list.title}
                         <button onClick={() => handleCreateNote(list)}>New Note</button>
+                        <button onClick={() => handleEditList(list)}>Edit List</button>
+                        <button onClick={() => deleteList(list)}>Delete List</button>
                     </Title>
                     <Droppable droppableId={list.id} type="note">
                     {(provided, snapshot) => (
@@ -67,8 +76,10 @@ const List = props => {
                         { 
                         notes.map((noteId, index) => {
                             const note = projectNotes.find(note => note.id === noteId)
+                            console.log(`Note error: ${note}`)
+                            console.log(`NoteId: ${noteId}`)
                             return (
-                                <Note key={note.id} note={note} index={index}/>
+                                <Note key={note.id} note={note} list={list} index={index} editNote={editNote} deleteNote={deleteNote}/>
                             )
                         })}
                         {provided.placeholder}
