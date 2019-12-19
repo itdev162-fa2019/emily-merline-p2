@@ -115,7 +115,7 @@ class App extends React.Component {
     const projectNotes = newNotes.filter(note => note.projectName === projName)
 
     this.setState({
-      ntoes: newNotes,
+      notes: newNotes,
       projectNotes: projectNotes
     })
   }
@@ -181,12 +181,8 @@ class App extends React.Component {
           newStringLists = newProjLists.toString()
 
         }
-        this.updateListOrder(this.state.project, newStringLists)
-
-        this.setState({
-          lists: [...newLists],
-          projectLists: projectLists
-        })
+        
+        this.updateListOrderDelete(this.state.project, newStringLists, newLists, projectLists)
       })
 
       .catch(error => {
@@ -200,26 +196,23 @@ class App extends React.Component {
       .then(response => {
         const newNotes = this.state.notes.filter(n => n.id !== note.id)
         const projectNotes = newNotes.filter(note => note.projectName === this.state.project.name)
-        //also have to remove note from list notes
+
+        //also have to remove list from project lists
         const currentListNotes = list.notes.split(',')
         let newStringNotes
         if(currentListNotes.length === 1){
           newStringNotes = ""
         } else {
-          const newListNotes = currentListNotes.filter(noteId => noteId !== note.id)
-          newStringNotes = newListNotes.toString()
+          const newProjLists = currentListNotes.filter(noteId => noteId !== note.id)
+          newStringNotes = newProjLists.toString()
 
         }
-        this.updateNoteOrder(list, newStringNotes)
-
-        this.setState({
-          notes: [...newNotes],
-          projectNotes: projectNotes
-        })
+        
+        this.updateNoteOrderDelete(list, newStringNotes, newNotes, projectNotes)
       })
 
       .catch(error => {
-        console.error(`Error deleting note: ${error}`)
+        console.error(`Error deleting list: ${error}`)
       })
   }
 
@@ -247,6 +240,101 @@ class App extends React.Component {
     })
   }
 
+  updateListOrderDelete = (project, listString, newLists, projectLists) => {
+
+    const update = async () => {
+
+      const newProject = {
+          id: project.id,
+          name: project.name,
+          lists: listString
+      }
+
+      try {
+          const config = {
+              headers: {
+                  'Content-Type': 'application/json'
+              }
+          }
+
+          //Update the list
+          const body = JSON.stringify(newProject)
+          const res = await axios.put(
+              'http://localhost:5000/api/projects',
+              body,
+              config
+          )
+
+          const updatedProject = res.data
+          console.log('updated project: ', updatedProject)
+          const newProjects = [...this.state.projects]
+          const index = newProjects.findIndex(p => p.id === updatedProject.id)
+      
+          newProjects[index] = updatedProject
+          
+          this.setState({
+            projects: newProjects,
+            project: updatedProject,
+            lists: newLists,
+            projectLists: projectLists
+          })
+
+      } catch (error) {
+          console.error(`Error creating lists: ${error.response.data}`)
+      }
+  }
+  update()
+}
+
+updateNoteOrderDelete = (list, newStringNotes, newNotes, projectNotes) => {
+
+  const update = async () => {
+
+    const newList = {
+        id: list.id,
+        title: list.title,
+        projectName: list.projectName,
+        notes: newStringNotes
+    }
+
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        //Update the list
+        const body = JSON.stringify(newList)
+        const res = await axios.put(
+            'http://localhost:5000/api/lists',
+            body,
+            config
+        )
+
+        const updatedList = res.data
+        console.log('updated list: ', updatedList)
+        const newLists = [...this.state.lists]
+        const index = newLists.findIndex(l => l.id === updatedList.id)
+    
+        newLists[index] = updatedList
+        
+        const newProjLists = newLists.filter(list => list.projectName === this.state.project.name)
+
+        this.setState({
+          lists: newLists,
+          projectNotes: projectNotes,
+          notes: newNotes,
+          list: updatedList,
+          projectLists: newProjLists
+        })
+
+    } catch (error) {
+        console.error(`Error creating lists: ${error.response.data}`)
+    }
+}
+update()
+}
   updateListOrder = (project, listString) => {
 
     const update = async () => {
